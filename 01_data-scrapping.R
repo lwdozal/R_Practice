@@ -68,3 +68,34 @@ pencil_reviews[16,]
 pencil_reviews <- pencil_reviews %>% 
   mutate(rate = sub(" out of 5 stars", "", rate))
 #view(pencil_reviews)
+
+
+######################### Tokenize Text ###############################
+library(tidytext)
+
+#create a text id to know which words belong to which review
+#text/document/review id
+pencil_reviews <- pencil_reviews %>% 
+  mutate(review_id = row_number())
+#pencil_reviews
+
+
+#tokenize words in text
+pencil_reviews_tokenized <- pencil_reviews %>% 
+  unnest_tokens(word, text) #input text, output single word. The unnest function lowercases everything
+#pencil_reviews_tokenized
+
+#for punctuation organization - do a tokenization by sentence, then do the words to see which sentence belongs to which different word
+
+
+#count words per rate (5 levels total)
+pencil_reviews_tokenized %>% 
+  count(rate, word) %>% 
+  arrange(-n)
+  
+
+
+#plot top 10 most frequent words per rate category
+
+  
+  

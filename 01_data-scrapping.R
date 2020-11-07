@@ -61,5 +61,10 @@ pencil_reviews <- pencil_reviews %>%
   mutate(text = gsub("\\n", "", text)) %>% #gsub = global substitution, looks for a pattern and changes it to something else
   mutate(text = trimws(text)) #trimws trims the white space
 
+#look at line 16
+pencil_reviews[16,]
 
-
+#replace "out of 5 stars" with noting
+pencil_reviews <- pencil_reviews %>% 
+  mutate(rate = sub(" out of 5 stars", "", rate))
+#view(pencil_reviews)
